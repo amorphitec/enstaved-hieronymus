@@ -71,9 +71,13 @@ class ModelConfiguration(GeneralConfiguration):
     MODELS_TOP = [
         'd20',
         'heart',
-        'knot_simple_03',
-        'pentagram_simple_01',
+        'hyrule',
+        'knot_03',
+        'pentagram_01',
         'pumpkin',
+        'rebel',
+        'snowflake',
+        'spiral_01',
     ]
     MODEL_TOP_DEFAULT = 'pumpkin'
 
