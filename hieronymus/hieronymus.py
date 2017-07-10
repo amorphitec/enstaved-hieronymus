@@ -5,6 +5,7 @@
 # * toppers in dict w/list of models
 #  * OR just trawl the dir on start
 # * color list mapping name: rgb
+# * output to ELK/influx
 
 
 from __future__ import division
@@ -25,7 +26,7 @@ class GeneralConfiguration(metaclass=MetaFlaskEnv):
     '''
     These values may be overridden by environment variables.
     '''
-    MODEL_DIR = '/home/james/Documents/Enstaved/STL_files/'
+    MODEL_DIR = '/data/models'
     MODEL_TOP_SUBDIR = 'top'
     MODEL_BODY_SUBDIR = 'body'
     MODEL_BASE_SUBDIR = 'base'
@@ -202,6 +203,7 @@ def render_staff():
     if colors_body == []:
         colors_body = app.config['COLORS_BODY_DEFAULT']
     # TODO: validate these before continuing
+    # wtforms/webargs/voluptuous
     image_base64 = get_staff_img(model_top, model_body, model_base, body_sections,
            colors_top, colors_body)
     return render_template('image_base64.html', image=image_base64, alt='staff')
