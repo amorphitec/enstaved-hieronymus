@@ -2,11 +2,10 @@
 
 # TODO:
 #
-# * / demo page
-# * containerise
 # * toppers in dict w/list of models
 #  * OR just trawl the dir on start
 # * color list mapping name: rgb
+
 
 from __future__ import division
 import os, sys, re
@@ -43,6 +42,7 @@ class GeneralConfiguration(metaclass=MetaFlaskEnv):
     RENDER_COLOR_SCHEME = 'White'
     OPENSCAD_PATH= '/usr/bin/openscad'
 
+
 class ModelConfiguration(GeneralConfiguration):
     '''
     TODO: These values will be loaded from file.
@@ -50,6 +50,8 @@ class ModelConfiguration(GeneralConfiguration):
     COLORS = [
        "white",
        "black",
+       "silver",
+       "grey",
        "blue",
        "green",
        "red",
@@ -203,3 +205,12 @@ def render_staff():
     image_base64 = get_staff_img(model_top, model_body, model_base, body_sections,
            colors_top, colors_body)
     return render_template('image_base64.html', image=image_base64, alt='staff')
+
+
+def main():
+    app.run()
+    return(os.EX_OK)
+
+
+if __name__ == '__main__':
+    sys.exit(main())
