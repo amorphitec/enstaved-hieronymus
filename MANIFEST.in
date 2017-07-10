@@ -1,0 +1,3 @@
+recursive-include hieronymus/frontend *.html *.js *.css *.svg *.ico
+include README.md
+include LICENSE.txt
