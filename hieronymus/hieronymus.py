@@ -90,7 +90,6 @@ class ModelConfiguration(GeneralConfiguration):
 
 app = Flask(__name__)
 app.config.from_object(ModelConfiguration)
-print(app.config)
 
 
 def get_top_scad(colors, model_path):
