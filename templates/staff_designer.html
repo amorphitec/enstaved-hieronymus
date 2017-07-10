@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Enstaved Staff Designer</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hieronymus.css') }}">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Staff Designer</h1>
+        </div>
+      </div>
+      <div class="row voffset4">
+        <div class="col-md-5">
+          <form>
+            <div class="form-group">
+              <h3>Top</h3>
+              <label for="top-model">Design</label>
+              <select id="top-model" class="form-control" onchange="updateStaffImage()"> 
+                {% for each in models_top %}
+                  <option value="{{ each }}">{{ each }}</option>
+                {% endfor %}
+              </select>
+              <label for="top-color-1">Color 1</label>
+              <select id="top-color-1" class="form-control" onchange="updateStaffImage()"> 
+                {% for each in colors %}
+                  <option value="{{ each }}">{{ each }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <h3>Body</h3>
+              <label for="body-model">Design</label>
+              <select id="body-model" class="form-control" onchange="updateStaffImage()"> 
+                {% for each in models_body %}
+                  <option value="{{ each }}">{{ each }}</option>
+                {% endfor %}
+              </select>
+              <label for="body-sections">Sections</label>
+              <select id="body-sections" class="form-control" onchange="updateStaffImage()"> 
+                {% for each in range(9) %}
+                  <option value="{{ each }}">{{ each }}</option>
+                {% endfor %}
+              </select>
+              <label for="body-color-1">Color 1</label>
+              <select id="body-color-1" class="form-control" onchange="updateStaffImage()"> 
+                {% for each in colors %}
+                  <option value="{{ each }}">{{ each }}</option>
+                {% endfor %}
+              </select>
+              <label for="body-color-2">Color 2</label>
+              <select id="body-color-2" class="form-control" onchange="updateStaffImage()"> 
+                <option value="">&lt;None&gt;</option>
+                {% for each in colors %}
+                  <option value="{{ each }}">{{ each }}</option>
+                {% endfor %}
+              </select>
+              <label for="body-color-3">Color 3</label>
+              <select id="body-color-3" class="form-control" onchange="updateStaffImage()"> 
+                <option value="">&lt;None&gt;</option>
+                {% for each in colors %}
+                  <option value="{{ each }}">{{ each }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <h3>Base</h3>
+              <label for="base-model">Design</label>
+              <select id="base-model" class="form-control" onchange="updateStaffImage()"> 
+                {% for each in models_base %}
+                  <option value="{{ each }}">{{ each }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+          <img id="staff-render"/>
+        </div>
+      </div>      
+    </div>      
+    <script>
+      function updateStaffImage () {
+        var url = "http://localhost:5000/render?";
+        url += "model-top=" + $("#top-model").val();
+        url += "&model-body=" + $("#body-model").val();
+        url += "&model-base=" + $("#base-model").val();
+        url += "&body-sections=" + $("#body-sections").val();
+        url += "&color-top=" + $("#top-color-1").val();
+        url += "&color-body=" + $("#body-color-1").val();
+        if ($("#body-color-2").val() != "") {
+          url += "&color-body=" + $("#body-color-2").val();
+        }
+        if ($("#body-color-3").val() != "") {
+          url += "&color-body=" + $("#body-color-3").val();
+        }
+        $("#staff-render").load(url);
+      }
+
+      $(window).on('load', function() {
+        updateStaffImage();
+      })
+
+      
+    </script>
+  </body>
+</html>
