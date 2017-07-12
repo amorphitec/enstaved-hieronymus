@@ -14,6 +14,7 @@ import itertools
 import subprocess
 import base64
 import tempfile
+import logging
  
 from solid import *
 from solid.utils import *
@@ -180,8 +181,7 @@ def get_staff_img(model_top, model_body, model_base, body_sections,
                 stderr=subprocess.STDOUT,
                 universal_newlines=True)
         except subprocess.CalledProcessError as err:
-            # TODO: log this error
-            print(err.output)
+            app.logger.error(err.output)
         return get_file_as_base64(image_file.name)
 
 
@@ -214,6 +214,9 @@ def render_staff():
 
 
 def main():
+    if not app.debug:
+        app.logger.addHandler(logging.StreamHandler())
+        app.logger.setLevel(logging.INFO)
     app.run()
     return(os.EX_OK)
 
