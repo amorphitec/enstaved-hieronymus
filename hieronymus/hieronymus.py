@@ -98,6 +98,9 @@ class ModelConfiguration(GeneralConfiguration):
 
 app = Flask(__name__)
 app.config.from_object(ModelConfiguration)
+if not app.debug:
+    app.logger.addHandler(logging.StreamHandler())
+    app.logger.setLevel(logging.INFO)
 
 
 def get_top_scad(colors, model_path):
@@ -214,9 +217,6 @@ def render_staff():
 
 
 def main():
-    if not app.debug:
-        app.logger.addHandler(logging.StreamHandler())
-        app.logger.setLevel(logging.INFO)
     app.run()
     return(os.EX_OK)
 
