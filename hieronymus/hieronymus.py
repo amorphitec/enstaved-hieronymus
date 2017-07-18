@@ -107,18 +107,31 @@ class ModelConfiguration(GeneralConfiguration):
     BASE_DEFAULT = 'round'
 
 
-app = Flask(__name__)
-app.config.from_object(ModelConfiguration)
-if not app.debug:
-    app.logger.addHandler(logging.StreamHandler())
-    app.logger.setLevel(logging.INFO)
+def load_top_model_paths():
+    '''
+    Determine model paths for defined tops if not specified in config.
+
+    TODO: move this (and others) to separate module
+    '''
+    for top, params in app.config['TOPS'].items():
+        if 'models' in params:
+            continue
+        top_path = os.path.join(app.config['MODEL_DIR'],
+                                app.config['MODEL_TOP_SUBDIR'], top)
+        app.config['TOPS'][top]['models'] = [
+            os.path.join(top_path, f) for f in os.listdir(top_path)
+            if f.split('.')[-1] == app.config['MODEL_SUFFIX']]
+        app.logger.info('Loaded models for {0}: {1}'.format(top,
+            app.config['TOPS'][top]['models']))
 
 
-def get_top_scad(colors, model_path):
-    # TODO: cater for multi-part models
+def get_top_scad(colors, model_paths):
+    components = []
     colors = itertools.cycle(colors)
-    model = import_stl(model_path)
-    return color(next(colors))(model)
+    for each in model_paths:
+        model = import_stl(each)
+        components.append(color(next(colors))(model))
+    return union()(*components)
 
 
 def get_body_scad(offset_top, offset_body, colors, model_path,
