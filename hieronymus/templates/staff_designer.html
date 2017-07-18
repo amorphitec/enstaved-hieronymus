@@ -22,10 +22,10 @@
           <form>
             <div class="form-group">
               <h3>Top</h3>
-              <label for="top-model">Design</label>
-              <select id="top-model" class="form-control" onchange="updateStaffImage()"> 
-                {% for each in models_top %}
-                  <option value="{{ each }}">{{ each }}</option>
+              <label for="top-id">Design</label>
+              <select id="top-id" class="form-control" onchange="updateStaffImage()">
+                {% for id, params in models_top.items() %}
+                  <option value="{{ id }}">{{ params.name }}</option>
                 {% endfor %}
               </select>
               <label for="top-color-1">Color 1</label>
@@ -34,36 +34,42 @@
                   <option value="{{ each }}">{{ each }}</option>
                 {% endfor %}
               </select>
+              <label for="top-color-2">Color 2</label>
+              <select id="top-color-2" class="form-control" onchange="updateStaffImage()">
+                {% for each in colors %}
+                  <option value="{{ each }}">{{ each }}</option>
+                {% endfor %}
+              </select>
             </div>
             <div class="form-group">
               <h3>Body</h3>
-              <label for="body-model">Design</label>
-              <select id="body-model" class="form-control" onchange="updateStaffImage()"> 
+              <label for="body-id">Design</label>
+              <select id="body-id" class="form-control" onchange="updateStaffImage()">
                 {% for each in models_body %}
                   <option value="{{ each }}">{{ each }}</option>
                 {% endfor %}
               </select>
               <label for="body-sections">Sections</label>
-              <select id="body-sections" class="form-control" onchange="updateStaffImage()"> 
+              <select id="body-sections" class="form-control" onchange="updateStaffImage()">
                 {% for each in range(9) %}
                   <option value="{{ each }}">{{ each }}</option>
                 {% endfor %}
               </select>
               <label for="body-color-1">Color 1</label>
-              <select id="body-color-1" class="form-control" onchange="updateStaffImage()"> 
+              <select id="body-color-1" class="form-control" onchange="updateStaffImage()">
                 {% for each in colors %}
                   <option value="{{ each }}">{{ each }}</option>
                 {% endfor %}
               </select>
               <label for="body-color-2">Color 2</label>
-              <select id="body-color-2" class="form-control" onchange="updateStaffImage()"> 
+              <select id="body-color-2" class="form-control" onchange="updateStaffImage()">
                 <option value="">&lt;None&gt;</option>
                 {% for each in colors %}
                   <option value="{{ each }}">{{ each }}</option>
                 {% endfor %}
               </select>
               <label for="body-color-3">Color 3</label>
-              <select id="body-color-3" class="form-control" onchange="updateStaffImage()"> 
+              <select id="body-color-3" class="form-control" onchange="updateStaffImage()">
                 <option value="">&lt;None&gt;</option>
                 {% for each in colors %}
                   <option value="{{ each }}">{{ each }}</option>
@@ -72,8 +78,8 @@
             </div>
             <div class="form-group">
               <h3>Base</h3>
-              <label for="base-model">Design</label>
-              <select id="base-model" class="form-control" onchange="updateStaffImage()"> 
+              <label for="base-id">Design</label>
+              <select id="base-id" class="form-control" onchange="updateStaffImage()">
                 {% for each in models_base %}
                   <option value="{{ each }}">{{ each }}</option>
                 {% endfor %}
@@ -89,18 +95,21 @@
     </div>      
     <script>
       function updateStaffImage () {
-        var url = "/render?";
-        url += "model-top=" + $("#top-model").val();
-        url += "&model-body=" + $("#body-model").val();
-        url += "&model-base=" + $("#base-model").val();
+        var url = "/render_staff?";
+        url += "top-id=" + $("#top-id").val();
+        url += "&body-id=" + $("#body-id").val();
+        url += "&base-id=" + $("#base-id").val();
         url += "&body-sections=" + $("#body-sections").val();
-        url += "&color-top=" + $("#top-color-1").val();
-        url += "&color-body=" + $("#body-color-1").val();
+        url += "&top-color=" + $("#top-color-1").val();
+        if ($("#top-color-2").val() != "") {
+          url += "&top-color=" + $("#top-color-2").val();
+        }
+        url += "&body-color=" + $("#body-color-1").val();
         if ($("#body-color-2").val() != "") {
-          url += "&color-body=" + $("#body-color-2").val();
+          url += "&body-color=" + $("#body-color-2").val();
         }
         if ($("#body-color-3").val() != "") {
-          url += "&color-body=" + $("#body-color-3").val();
+          url += "&body-color=" + $("#body-color-3").val();
         }
         $("#staff-render").load(url);
       }

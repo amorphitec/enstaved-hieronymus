@@ -32,7 +32,7 @@ class GeneralConfiguration(metaclass=MetaFlaskEnv):
     MODEL_TOP_SUBDIR = 'top'
     MODEL_BODY_SUBDIR = 'body'
     MODEL_BASE_SUBDIR = 'base'
-    MODEL_SUFFIX = '.stl'
+    MODEL_SUFFIX = 'stl'
 
     BODY_SECTIONS_DEFAULT = 8 
 
@@ -48,7 +48,7 @@ class GeneralConfiguration(metaclass=MetaFlaskEnv):
 
 class ModelConfiguration(GeneralConfiguration):
     '''
-    TODO: These values will be loaded from file.
+    These values will be loaded from file.
     '''
     COLORS = [
        "white",
@@ -70,31 +70,41 @@ class ModelConfiguration(GeneralConfiguration):
         'red',
     ]
 
-    MODELS_TOP = [
-        'd20',
-        'heart',
-        'hyrule',
-        'knot_03',
-        'pentagram_01',
-        'pumpkin',
-        'rebel',
-        'snowflake',
-        'spiral_01',
-    ]
-    MODEL_TOP_DEFAULT = 'pumpkin'
+    TOPS = {
+        'd20':          {
+            'name': 'The DM Staff of Natural 20',
+        },
+        'heart':        {
+            'name': 'The Suite Staff of Hearts',
+        },
+        'horus':        {
+            'name': 'The All-Seeing Staff of Horus',
+        },
+        'pumpkin':      {
+            'name': 'The Pumpkin Staff of Tricks and Treats',
+        },
+        'soccerball':   {
+            'name': 'The Soccer Staff of Supporting',
+        },
+        'yinyang':  {
+            'name': 'The Harmonic Staff of Balance',
+        },
+    }
 
-    MODELS_BODY = [
+    TOP_DEFAULT = 'pumpkin'
+
+    BODIES = [
         'gnarled',
         'knurled',
         'sliced',
     ]
-    MODEL_BODY_DEFAULT = 'gnarled'
+    BODY_DEFAULT = 'gnarled'
 
-    MODELS_BASE = [
+    BASES = [
         'round',
         'flat',
     ]
-    MODEL_BASE_DEFAULT = 'round'
+    BASE_DEFAULT = 'round'
 
 
 app = Flask(__name__)
@@ -135,27 +145,25 @@ def get_base_scad(offset_top, offset_body, colors, model_path,
     return up(offset)(color(colour)(model))
 
 
-def get_staff_scad(model_top, model_body, model_base, body_sections,
+def get_staff_scad(top_id, body_id, base_id, body_sections,
                    colors_top, colors_body):
-    top = get_top_scad(colors_top,
-                       os.path.join(app.config['MODEL_DIR'],
-                                    app.config['MODEL_TOP_SUBDIR'],
-                                    model_top + app.config['MODEL_SUFFIX']))
+    top = get_top_scad(colors_top, app.config['TOPS'][top_id]['models'])
     body = get_body_scad(app.config['OFFSET_BODY_FROM_TOP'],
                          app.config['OFFSET_BODY_FROM_BODY'],
                          colors_body,
                          os.path.join(app.config['MODEL_DIR'], 
                                       app.config['MODEL_BODY_SUBDIR'],
-                                      model_body + app.config['MODEL_SUFFIX']),
+                                      body_id + '.' + app.config['MODEL_SUFFIX']),
                          body_sections)
     base = get_base_scad(app.config['OFFSET_BASE_FROM_TOP'],
                          app.config['OFFSET_BODY_FROM_BODY'],
                          colors_body,
                          os.path.join(app.config['MODEL_DIR'],
                                       app.config['MODEL_BASE_SUBDIR'],
-                                      model_base + app.config['MODEL_SUFFIX']),
+                                      base_id + '.' + app.config['MODEL_SUFFIX']),
                          body_sections)
     staff = rotate([180,0,0])(union()(top, body, base))
+    #print(scad_render(staff))
     return staff
 
 
@@ -189,30 +197,38 @@ def get_staff_img(model_top, model_body, model_base, body_sections,
         return get_file_as_base64(image_file.name)
 
 
+app = Flask(__name__)
+app.config.from_object(ModelConfiguration)
+if not app.debug:
+    app.logger.addHandler(logging.StreamHandler())
+    app.logger.setLevel(logging.INFO)
+load_top_model_paths()
+
+
 @app.route("/", methods=['GET'])
 def staff_designer():
     return render_template('staff_designer.html', colors=app.config['COLORS'],
-                           models_top = app.config['MODELS_TOP'],
-                           models_body = app.config['MODELS_BODY'],
-                           models_base = app.config['MODELS_BASE'])
+                           models_top = app.config['TOPS'],
+                           models_body = app.config['BODIES'],
+                           models_base = app.config['BASES'])
 
 
-@app.route("/render", methods=['GET'])
+@app.route("/render_staff", methods=['GET'])
 def render_staff():
-    model_top = request.args.get('model-top',
-                                 app.config['MODEL_TOP_DEFAULT'])
-    model_body = request.args.get('model-body', app.config['MODEL_BODY_DEFAULT'])
-    model_base = request.args.get('model-base', app.config['MODEL_BASE_DEFAULT'])
+    top_id = request.args.get('top-id',
+                              app.config['TOP_DEFAULT'])
+    body_id = request.args.get('body-id', app.config['BODY_DEFAULT'])
+    base_id = request.args.get('base-id', app.config['BASE_DEFAULT'])
     body_sections = int(request.args.get('body-sections', app.config['BODY_SECTIONS_DEFAULT']))
-    colors_top = request.args.getlist('color-top')
+    colors_top = request.args.getlist('top-color')
     if colors_top == []:
         colors_top = app.config['COLORS_TOP_DEFAULT']
-    colors_body = request.args.getlist('color-body')
+    colors_body = request.args.getlist('body-color')
     if colors_body == []:
         colors_body = app.config['COLORS_BODY_DEFAULT']
     # TODO: validate these before continuing
     # wtforms/webargs/voluptuous
-    image_base64 = get_staff_img(model_top, model_body, model_base, body_sections,
+    image_base64 = get_staff_img(top_id, body_id, base_id, body_sections,
            colors_top, colors_body)
     return render_template('image_base64.html', image=image_base64, alt='staff')
 
