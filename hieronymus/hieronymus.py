@@ -1,11 +1,12 @@
 #! /usr/bin/env python
 
 # TODO:
-#
-# * toppers in dict w/list of models
-#  * OR just trawl the dir on start
+# * config yaml
+# * move utils to separate module
 # * color list mapping name: rgb
 # * output to ELK/influx
+# * close-up render top, body, base
+# * redis cache
 
 
 from __future__ import division
