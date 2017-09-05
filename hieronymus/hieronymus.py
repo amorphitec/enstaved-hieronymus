@@ -3,6 +3,7 @@
 # TODO:
 # * config yaml
 # * move utils to separate module
+# * replace img src instead of entire tag
 # * color list mapping name: rgb
 # * output to ELK/influx
 # * close-up render top, body, base
@@ -79,6 +80,9 @@ class ModelConfiguration(GeneralConfiguration):
         },
         'horus':        {
             'name': 'The All-Seeing Staff of Horus',
+        },
+        'pentagram':    {
+            'name': 'The Pagan Staff of Pentacles',
         },
         'pumpkin':      {
             'name': 'The Pumpkin Staff of Tricks and Treats',
