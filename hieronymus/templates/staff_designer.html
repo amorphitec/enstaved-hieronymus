@@ -52,7 +52,7 @@
               <label for="body-sections">Sections</label>
               <select id="body-sections" class="form-control" onchange="updateStaffImage()">
                 {% for each in range(9) %}
-                  <option value="{{ each }}">{{ each }}</option>
+                  <option value="{{ each }}">{{ each }} ({{ each * 15.5}}cm)</option>
                 {% endfor %}
               </select>
               <label for="body-color-1">Color 1</label>
