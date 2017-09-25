@@ -231,7 +231,8 @@ def staff_designer():
 
 
 @app.route("/render_staff", methods=['GET'])
-@cross_origin(origins="*.enstaved.com")
+#@cross_origin(origins="*.enstaved.com")
+@cross_origin(origins="*")
 def render_staff():
     top_id = request.args.get('top-id',
                               app.config['TOP_DEFAULT'])
