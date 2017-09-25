@@ -20,6 +20,7 @@ setup(
         'solidpython>=0.2,<0.3',
         'Flask>=0.12.2,<0.13',
         'Flask-Env>=1.0.1,<2.0',
+        'Flask-Cors>=3.0.3,<4.0',
     ],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',

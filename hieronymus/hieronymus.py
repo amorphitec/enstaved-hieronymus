@@ -23,7 +23,7 @@ from solid.utils import *
 from solid import screw_thread
 from flask import Flask, request, render_template
 from flask_env import MetaFlaskEnv
-
+from flask_cors import CORS
 
 class GeneralConfiguration(metaclass=MetaFlaskEnv):
     '''
@@ -231,6 +231,7 @@ def staff_designer():
 
 
 @app.route("/render_staff", methods=['GET'])
+@cross_origin("origins": "*.enstaved.com")
 def render_staff():
     top_id = request.args.get('top-id',
                               app.config['TOP_DEFAULT'])
