@@ -234,7 +234,7 @@ def staff_designer():
 #@cross_origin(origins="*.enstaved.com")
 @cross_origin(origins="*")
 def render_staff():
-    embed = request.POST.get('embed', False) == 'true'
+    embed = request.args.get('embed', False) == 'true'
     top_id = request.args.get('top-id',
                               app.config['TOP_DEFAULT'])
     body_id = request.args.get('body-id', app.config['BODY_DEFAULT'])
