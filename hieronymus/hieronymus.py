@@ -23,7 +23,7 @@ from solid.utils import *
 from solid import screw_thread
 from flask import Flask, request, render_template
 from flask_env import MetaFlaskEnv
-from flask_cors import CORS
+from flask_cors import cors
 
 class GeneralConfiguration(metaclass=MetaFlaskEnv):
     '''
