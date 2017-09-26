@@ -252,7 +252,7 @@ def render_staff():
            colors_top, colors_body)
     if embed:
         return render_template('image_base64.html', image=image_base64, alt='staff')
-    return image_base64
+    return 'data:image/png;base64, ' + image_base64
 
 
 def main():
