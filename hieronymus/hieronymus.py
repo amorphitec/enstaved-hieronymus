@@ -41,8 +41,8 @@ class GeneralConfiguration(metaclass=MetaFlaskEnv):
     OFFSET_BODY_FROM_BODY = 150
     OFFSET_BASE_FROM_TOP = 22
 
-    RENDER_IMAGE_SIZE = '300,800'
-    RENDER_CAMERA_COORDS = '0,0,-590,90,-15,0,3500'
+    RENDER_IMAGE_SIZE = '540,540'
+    RENDER_CAMERA_COORDS = '0,0,-590,90,-30,0,3200'
     RENDER_COLOR_SCHEME = 'White'
     OPENSCAD_PATH= '/usr/bin/openscad'
 
