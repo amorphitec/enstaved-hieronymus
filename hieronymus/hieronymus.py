@@ -3,10 +3,10 @@
 # TODO:
 # * config yaml
 # * move utils to separate module
-# * replace img src instead of entire tag
 # * color list mapping name: rgb
 # * output to ELK/influx
 # * close-up render top, body, base
+# * configurable resolutions (or based on staff length?)
 # * redis cache
 
 
@@ -234,6 +234,7 @@ def staff_designer():
 #@cross_origin(origins="*.enstaved.com")
 @cross_origin(origins="*")
 def render_staff():
+    embed = request.POST.get('embed', False) == 'true'
     top_id = request.args.get('top-id',
                               app.config['TOP_DEFAULT'])
     body_id = request.args.get('body-id', app.config['BODY_DEFAULT'])
@@ -249,7 +250,9 @@ def render_staff():
     # wtforms/webargs/voluptuous
     image_base64 = get_staff_img(top_id, body_id, base_id, body_sections,
            colors_top, colors_body)
-    return render_template('image_base64.html', image=image_base64, alt='staff')
+    if embed:
+        return render_template('image_base64.html', image=image_base64, alt='staff')
+    return image_base64
 
 
 def main():
