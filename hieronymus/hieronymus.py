@@ -72,41 +72,67 @@ class ModelConfiguration(GeneralConfiguration):
     ]
 
     TOPS = {
-        'd20':          {
-            'name': 'The DM Staff of Natural 20',
+        'dm-staff-of-natural-20': {
+            'name': 'DM Staff of Natural 20',
         },
-        'heart':        {
-            'name': 'The Suite Staff of Hearts',
+        'celtic-staff-of-life': {
+            'name': 'Celtic Staff of Life',
         },
-        'horus':        {
-            'name': 'The All-Seeing Staff of Horus',
+        'suite-staff-of-hearts': {
+            'name': 'Suite Staff of Hearts',
         },
-        'pentagram':    {
-            'name': 'The Pagan Staff of Pentacles',
+        'all-seeing-staff-of-horus': {
+            'name': 'All-Seeing Staff of Horus',
         },
-        'pumpkin':      {
-            'name': 'The Pumpkin Staff of Tricks and Treats',
+        'pagan-staff-of-pentacles': {
+            'name': 'Pagan Staff of Pentacles',
         },
-        'soccerball':   {
-            'name': 'The Soccer Staff of Supporting',
+        'pumpkin-staff-of-tricks-and-treats': {
+            'name': 'Pumpkin Staff of Tricks and Treats',
         },
-        'yinyang':  {
-            'name': 'The Harmonic Staff of Balance',
+        'soccer-staff-of-supporting': {
+            'name': 'Soccer Staff of Supporting',
+        },
+        'harmonic-staff-of-balance': {
+            'name': 'Harmonic Staff of Balance',
+        },
+        'emotive-staff-of-communication': {
+            'name': 'Emotive Staff of Communication',
+        },
+        'hyrule-staff-of-power': {
+            'name': 'Hyrule Staff of Power',
+        },
+        'evil-staff-of-empire': {
+            'name': 'Evil Staff of Empire',
+        },
+        'noble-staff-of-rebellion': {
+            'name': 'Noble Staff of Rebellion',
+        },
+        'bound-staff-of-triquestra': {
+            'name': 'Bound Staff of Triquestra',
+        },
+        'frozen-staff-of-winter': {
+            'name': 'Frozen Staff of Winter',
         },
     }
 
-    TOP_DEFAULT = 'pumpkin'
+    TOP_DEFAULT = 'pumpkin-staff-of-tricks-and-treats'
 
     BODIES = [
         'gnarled',
         'knurled',
         'sliced',
+        'ruby',
     ]
     BODY_DEFAULT = 'gnarled'
 
     BASES = [
-        'round',
-        'flat',
+        'endcap-round',
+        'endcap-flat',
+        'endcap-ruby',
+        'display-round',
+        'display-snowflake',
+        'display-star',
     ]
     BASE_DEFAULT = 'round'
 
