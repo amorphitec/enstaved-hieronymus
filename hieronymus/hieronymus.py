@@ -126,6 +126,9 @@ class ModelConfiguration(GeneralConfiguration):
         'vampiric-staff-of-alucard': {
             'name': 'Vampiric Staff of alucarD'
         },
+        'twinkling-staff-of-starbursts': {
+            'name': 'Twinkling Staff of Starbursts'
+        },
     }
 
     TOP_DEFAULT = 'pumpkin-staff-of-tricks-and-treats'
