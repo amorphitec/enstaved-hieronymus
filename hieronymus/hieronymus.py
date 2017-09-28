@@ -78,8 +78,17 @@ class ModelConfiguration(GeneralConfiguration):
         'celtic-staff-of-life': {
             'name': 'Celtic Staff of Life',
         },
+        'suite-staff-of-clubs': {
+            'name': 'Suite Staff of Clubs',
+        },
+        'suite-staff-of-diamonds': {
+            'name': 'Suite Staff of Diamonds',
+        },
         'suite-staff-of-hearts': {
             'name': 'Suite Staff of Hearts',
+        },
+        'suite-staff-of-spades': {
+            'name': 'Suite Staff of Spades',
         },
         'all-seeing-staff-of-horus': {
             'name': 'All-Seeing Staff of Horus',
@@ -209,7 +218,6 @@ def get_staff_scad(top_id, body_id, base_id, body_sections,
                                       base_id + '.' + app.config['MODEL_SUFFIX']),
                          body_sections)
     staff = rotate([180,0,0])(union()(top, body, base))
-    #print(scad_render(staff))
     return staff
 
 
