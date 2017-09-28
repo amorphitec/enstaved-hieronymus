@@ -114,6 +114,9 @@ class ModelConfiguration(GeneralConfiguration):
         'frozen-staff-of-winter': {
             'name': 'Frozen Staff of Winter',
         },
+        'vampiric-staff-of-alucard': {
+            'name': 'Vampiric Staff of alucarD'
+        },
     }
 
     TOP_DEFAULT = 'pumpkin-staff-of-tricks-and-treats'
