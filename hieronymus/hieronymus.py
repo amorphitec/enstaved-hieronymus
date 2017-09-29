@@ -129,8 +129,8 @@ class ModelConfiguration(GeneralConfiguration):
         'noble-staff-of-rebellion': {
             'name': 'Noble Staff of Rebellion',
         },
-        'bound-staff-of-triquetra': {
-            'name': 'Bound Staff of Triquetra',
+        'celtic-staff-of-bound-triquetra': {
+            'name': 'Celtic Staff of Bound Triquetra',
         },
         'frozen-staff-of-winter': {
             'name': 'Frozen Staff of Winter',
