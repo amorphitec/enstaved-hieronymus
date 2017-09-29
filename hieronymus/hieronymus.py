@@ -8,6 +8,8 @@
 # * close-up render top, body, base
 # * configurable resolutions (or based on staff length?)
 # * redis cache
+# * remove defaults to allow individual parts
+# * or better support for individual parts 
 
 
 from __future__ import division
@@ -35,14 +37,24 @@ class GeneralConfiguration(metaclass=MetaFlaskEnv):
     MODEL_BASE_SUBDIR = 'base'
     MODEL_SUFFIX = 'stl'
 
-    BODY_SECTIONS_DEFAULT = 8 
+    BODY_SECTIONS_DEFAULT = 1 
 
     OFFSET_BODY_FROM_TOP = 92
     OFFSET_BODY_FROM_BODY = 150
     OFFSET_BASE_FROM_TOP = 22
 
     RENDER_IMAGE_SIZE = '540,540'
-    RENDER_CAMERA_COORDS = '0,0,-590,90,-30,0,3200'
+    RENDER_CAMERA_COORDS = {
+        0: '0,0,30,90,-30,0,600',
+        1: '0,0,-50,90,-30,0,1000',
+        2: '0,0,-140,90,-30,0,1300',
+        3: '0,0,-210,90,-30,0,1700',
+        4: '0,0,-280,90,-30,0,1900',
+        5: '0,0,-350,90,-30,0,2200',
+        6: '0,0,-430,90,-30,0,2600',
+        7: '0,0,-510,90,-30,0,2900',
+        8: '0,0,-590,90,-30,0,3300',
+    }
     RENDER_COLOR_SCHEME = 'White'
     OPENSCAD_PATH= '/usr/bin/openscad'
 
@@ -131,7 +143,7 @@ class ModelConfiguration(GeneralConfiguration):
         },
     }
 
-    TOP_DEFAULT = 'pumpkin-staff-of-tricks-and-treats'
+    TOP_DEFAULT = 'none'
 
     BODIES = [
         'gnarled',
@@ -139,7 +151,7 @@ class ModelConfiguration(GeneralConfiguration):
         'sliced',
         'ruby',
     ]
-    BODY_DEFAULT = 'gnarled'
+    BODY_DEFAULT = 'none'
 
     BASES = [
         'endcap-round',
@@ -149,7 +161,7 @@ class ModelConfiguration(GeneralConfiguration):
         'display-snowflake',
         'display-star',
     ]
-    BASE_DEFAULT = 'round'
+    BASE_DEFAULT = 'none'
 
 
 def load_top_model_paths():
@@ -205,7 +217,11 @@ def get_base_scad(offset_top, offset_body, colors, model_path,
 
 def get_staff_scad(top_id, body_id, base_id, body_sections,
                    colors_top, colors_body):
-    top = get_top_scad(colors_top, app.config['TOPS'][top_id]['models'])
+    # HACK: to handle empty top and thus render topless
+    try:
+        top = get_top_scad(colors_top, app.config['TOPS'][top_id]['models'])
+    except KeyError:
+        top = get_top_scad(colors_top, [])
     body = get_body_scad(app.config['OFFSET_BODY_FROM_TOP'],
                          app.config['OFFSET_BODY_FROM_BODY'],
                          colors_body,
@@ -243,7 +259,7 @@ def get_staff_img(model_top, model_body, model_base, body_sections,
                     app.config['OPENSCAD_PATH'],
                     scad_file.name,
                     '-o', image_file.name,
-                    '--camera=' + app.config['RENDER_CAMERA_COORDS'],
+                    '--camera=' + app.config['RENDER_CAMERA_COORDS'][body_sections],
                     '--imgsize=' + app.config['RENDER_IMAGE_SIZE'],
                     '--colorscheme=' + app.config['RENDER_COLOR_SCHEME'],
                 ],
@@ -293,6 +309,8 @@ def render_staff():
     if embed:
         return render_template('image_base64.html', image=image_base64, alt='staff')
     return 'data:image/png;base64, ' + image_base64
+
+
 
 
 def main():
