@@ -129,17 +129,23 @@ class ModelConfiguration(GeneralConfiguration):
         'noble-staff-of-rebellion': {
             'name': 'Noble Staff of Rebellion',
         },
-        'bound-staff-of-triquestra': {
-            'name': 'Bound Staff of Triquestra',
+        'bound-staff-of-triquetra': {
+            'name': 'Bound Staff of Triquetra',
         },
         'frozen-staff-of-winter': {
             'name': 'Frozen Staff of Winter',
         },
         'vampiric-staff-of-alucard': {
-            'name': 'Vampiric Staff of alucarD'
+            'name': 'Vampiric Staff of alucarD',
         },
         'twinkling-staff-of-starbursts': {
-            'name': 'Twinkling Staff of Starbursts'
+            'name': 'Twinkling Staff of Starbursts',
+        },
+        'yggdrasil-staff-of-world-tree': {
+            'name': 'Yggdrasil Staff of World Tree',
+        },
+        'ruby-staff-of-development': {
+            'name': 'Ruby Staff of Development',
         },
     }
 
