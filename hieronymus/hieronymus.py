@@ -147,6 +147,9 @@ class ModelConfiguration(GeneralConfiguration):
         'ruby-staff-of-development': {
             'name': 'Ruby Staff of Development',
         },
+        'mercenary-staff-of-mouthiness': {
+            'name': 'Mercenary Staff of Mouthiness',
+        }
     }
 
     TOP_DEFAULT = 'none'
