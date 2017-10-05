@@ -149,7 +149,10 @@ class ModelConfiguration(GeneralConfiguration):
         },
         'mercenary-staff-of-mouthiness': {
             'name': 'Mercenary Staff of Mouthiness',
-        }
+        },
+        'hieroglyphic-staff-of-life': {
+            'name': 'Hieroglyphic Staff of Life',
+        },
     }
 
     TOP_DEFAULT = 'none'
