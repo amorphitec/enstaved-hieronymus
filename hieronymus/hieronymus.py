@@ -153,6 +153,9 @@ class ModelConfiguration(GeneralConfiguration):
         'hieroglyph-staff-of-life': {
             'name': 'Hieroglyph Staff of Life',
         },
+        'bat-staff-of-dark-kngiht': {
+            'name': 'Bat Staff of Dark kNight',
+        },
     }
 
     TOP_DEFAULT = 'none'
