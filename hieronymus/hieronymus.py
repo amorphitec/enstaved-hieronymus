@@ -153,7 +153,7 @@ class ModelConfiguration(GeneralConfiguration):
         'hieroglyph-staff-of-life': {
             'name': 'Hieroglyph Staff of Life',
         },
-        'bat-staff-of-dark-kngiht': {
+        'bat-staff-of-dark-knight': {
             'name': 'Bat Staff of Dark kNight',
         },
     }
