@@ -150,8 +150,8 @@ class ModelConfiguration(GeneralConfiguration):
         'mercenary-staff-of-mouthiness': {
             'name': 'Mercenary Staff of Mouthiness',
         },
-        'hieroglyphic-staff-of-life': {
-            'name': 'Hieroglyphic Staff of Life',
+        'hieroglyph-staff-of-life': {
+            'name': 'Hieroglyph Staff of Life',
         },
     }
 
