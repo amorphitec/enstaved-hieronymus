@@ -90,6 +90,24 @@ class ModelConfiguration(GeneralConfiguration):
         'celtic-staff-of-life': {
             'name': 'Celtic Staff of Life',
         },
+        'celtic-staff-of-luck': {
+            'name': 'Celtic Staff of Luck',
+        },
+        'celtic-staff-of-family': {
+            'name': 'Celtic Staff of Family',
+        },
+        'celtic-staff-of-strength': {
+            'name': 'Celtic Staff of Strength',
+        },
+        'celtic-staff-of-triquetra': {
+            'name': 'Celtic Staff of Triquetra',
+        },
+        'celtic-staff-of-bound-triquetra': {
+            'name': 'Celtic Staff of Bound Triquetra',
+        },
+        'norse-staff-of-folk': {
+            'name': 'Norse Staff of Folk',
+        },
         'suite-staff-of-clubs': {
             'name': 'Suite Staff of Clubs',
         },
@@ -128,9 +146,6 @@ class ModelConfiguration(GeneralConfiguration):
         },
         'noble-staff-of-rebellion': {
             'name': 'Noble Staff of Rebellion',
-        },
-        'celtic-staff-of-bound-triquetra': {
-            'name': 'Celtic Staff of Bound Triquetra',
         },
         'frozen-staff-of-winter': {
             'name': 'Frozen Staff of Winter',
