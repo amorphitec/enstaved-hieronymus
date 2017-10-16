@@ -183,7 +183,7 @@ class ModelConfiguration(GeneralConfiguration):
         'twinkling-staff-of-growth': {
             'name': 'Twinkling Staff of Growth',
         },
-        'harlequin-staff-of-therapy':
+        'harlequin-staff-of-therapy': {
             'name': 'Harlequin Staff of Therapy',
         },
     }
