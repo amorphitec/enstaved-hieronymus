@@ -171,6 +171,21 @@ class ModelConfiguration(GeneralConfiguration):
         'bat-staff-of-dark-knight': {
             'name': 'Bat Staff of Dark kNight',
         },
+        'castle-staff-of-punishment': {
+            'name': 'Castle Staff of Punishment',
+        },
+        'paranormal-staff-of-reasearch': {
+            'name': 'Paranormal Staff of Research',
+        },
+        'green-staff-of-will': {
+            'name': 'Green Staff of Will',
+        },
+        'twinkling-staff-of-growth': {
+            'name': 'Twinkling Staff of Growth',
+        },
+        'harlequin-staff-of-therapy':
+            'name': 'Harlequin Staff of Therapy',
+        },
     }
 
     TOP_DEFAULT = 'none'
