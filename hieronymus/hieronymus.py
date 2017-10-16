@@ -174,7 +174,7 @@ class ModelConfiguration(GeneralConfiguration):
         'castle-staff-of-punishment': {
             'name': 'Castle Staff of Punishment',
         },
-        'paranormal-staff-of-reasearch': {
+        'paranormal-staff-of-research': {
             'name': 'Paranormal Staff of Research',
         },
         'green-staff-of-will': {
