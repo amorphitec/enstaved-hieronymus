@@ -186,6 +186,18 @@ class ModelConfiguration(GeneralConfiguration):
         'harlequin-staff-of-therapy': {
             'name': 'Harlequin Staff of Therapy',
         },
+        'house-staff-of-gryffins': {
+            'name': 'House Staff of Gryffins',
+        },
+        'house-staff-of-huffling': {
+            'name': 'House Staff of Huffling',
+        },
+        'house-staff-of-ravens': {
+            'name': 'House Staff of Ravens',
+        },
+        'house-staff-of-slythering': {
+            'name': 'House Staff of Slythering',
+        },
     }
 
     TOP_DEFAULT = 'none'
