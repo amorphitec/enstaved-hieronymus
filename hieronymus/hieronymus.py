@@ -198,6 +198,21 @@ class ModelConfiguration(GeneralConfiguration):
         'house-staff-of-slythering': {
             'name': 'House Staff of Slythering',
         },
+        'best-staff-of-training': {
+            'name': 'Best Staff of Training',
+        },
+        'holy-staff-of-armaments': {
+            'name': 'Holy Staff of Armaments',
+        },
+        'darkgrim-staff-of-future-war': {
+            'name': 'DarkGrim Staff of Future War',
+        },
+        'grimdark-staff-of-future-war-a': {
+            'name': 'GrimDark Staff of Future War A',
+        },
+        'grimdark-staff-of-future-war-b': {
+            'name': 'GrimDark Staff of Future War B',
+        },
     }
 
     TOP_DEFAULT = 'none'
