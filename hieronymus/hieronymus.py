@@ -308,7 +308,7 @@ def get_staff_scad(top_id, body_id, base_id, body_sections,
                                       app.config['MODEL_BASE_SUBDIR'],
                                       base_id + '.' + app.config['MODEL_SUFFIX']),
                          body_sections)
-    staff = rotate([180,0,0])(union()(top, body, base))
+    staff = rotate([180,0,-20])(union()(top, body, base))
     return staff
 
 
