@@ -105,6 +105,9 @@ class ModelConfiguration(GeneralConfiguration):
         'celtic-staff-of-bound-triquetra': {
             'name': 'Celtic Staff of Bound Triquetra',
         },
+        'celtic-staff-of-reunion': {
+            'name': 'Celtic Staff of Reunion',
+        },
         'norse-staff-of-folk': {
             'name': 'Norse Staff of Folk',
         },
