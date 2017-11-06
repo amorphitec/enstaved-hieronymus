@@ -207,6 +207,9 @@ class ModelConfiguration(GeneralConfiguration):
         'holy-staff-of-armaments': {
             'name': 'Holy Staff of Armaments',
         },
+        'pythonic-staff-of-enlightenment': {
+            'name': 'Pythonic Staff of Enlightenment',
+        },
         'darkgrim-staff-of-future-war': {
             'name': 'DarkGrim Staff of Future War',
         },
