@@ -238,6 +238,7 @@ class ModelConfiguration(GeneralConfiguration):
         'display-round',
         'display-snowflake',
         'display-star',
+        'display-curved',
     ]
     BASE_DEFAULT = 'none'
 
