@@ -223,6 +223,18 @@ class ModelConfiguration(GeneralConfiguration):
         'grimdark-staff-of-future-war-b': {
             'name': 'GrimDark Staff of Future War B',
         },
+        'runic-staff-of-mannaz': {
+            'name': 'Runic Staff of Mannaz',
+        },
+        'runic-staff-of-opila': {
+            'name': 'Runic Staff of Opila',
+        },
+        'runic-staff-of-algiz': {
+            'name': 'Runic Staff of Algiz',
+        },
+        'runic-staff-of-teiwaz': {
+            'name': 'Runic Staff of Teiwaz',
+        },
     }
 
     TOP_DEFAULT = 'none'
