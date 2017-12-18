@@ -71,10 +71,14 @@ class ModelConfiguration(GeneralConfiguration):
        "blue",
        "green",
        "red",
+       "brown",
        "yellow",
        "orange",
        "purple",
     ]
+    COLOR_MAP = {
+        'brown': 'saddlebrown',
+    }
     COLORS_TOP_DEFAULT = [
         'red',
     ]
@@ -296,6 +300,8 @@ def get_base_scad(offset_top, offset_body, colors, model_path,
 
 def get_staff_scad(top_id, body_id, base_id, body_sections,
                    colors_top, colors_body):
+    colors_top = map_colors(colors_top)
+    colors_body = map_colors(colors_body)
     # HACK: to handle empty top and thus render topless
     try:
         top = get_top_scad(colors_top, app.config['TOPS'][top_id]['models'])
@@ -323,6 +329,11 @@ def get_file_as_base64(path: str) -> str:
     with open(path, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
     return encoded_string.decode()
+
+def map_colors(colors):
+    color_map = app.config['COLOR_MAP']
+    return list(
+        map(lambda c: color_map[c] if c in color_map.keys() else c, colors))
 
 
 def get_staff_img(model_top, model_body, model_base, body_sections,
