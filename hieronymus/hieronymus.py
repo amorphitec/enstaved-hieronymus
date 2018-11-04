@@ -23,7 +23,7 @@ import logging
 from solid import *
 from solid.utils import *
 from solid import screw_thread
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, make_response
 from flask_env import MetaFlaskEnv
 from flask_cors import cross_origin
 
@@ -342,6 +342,10 @@ def get_file_as_base64(path: str) -> str:
         encoded_string = base64.b64encode(image_file.read())
     return encoded_string.decode()
 
+def get_file_as_binary(path: str) -> str:
+    with open(path, "rb") as image_file:
+        return image_file.read()
+
 def map_colors(colors):
     color_map = app.config['COLOR_MAP']
     return list(
@@ -349,7 +353,7 @@ def map_colors(colors):
 
 
 def get_staff_img(model_top, model_body, model_base, body_sections,
-                  colors_top, colors_body):
+                  colors_top, colors_body, base64=True):
     staff_scad = get_staff_scad(model_top, model_body, model_base,
                                 body_sections, colors_top, colors_body)
     with tempfile.NamedTemporaryFile() as scad_file, \
@@ -369,8 +373,9 @@ def get_staff_img(model_top, model_body, model_base, body_sections,
                 universal_newlines=True)
         except subprocess.CalledProcessError as err:
             app.logger.error(err.output)
-        return get_file_as_base64(image_file.name)
-
+        if base64:
+            return get_file_as_base64(image_file.name)
+        return get_file_as_binary(image_file.name)
 
 app = Flask(__name__)
 app.config.from_object(ModelConfiguration)
@@ -392,7 +397,8 @@ def staff_designer():
 #@cross_origin(origins="*.enstaved.com")
 @cross_origin(origins="*")
 def render_staff():
-    embed = request.args.get('embed', False) == 'true'
+    embed = request.args.get('embed', 'false') == 'true'
+    base64 = request.args.get('base64', 'true') == 'true'
     top_id = request.args.get('top-id',
                               app.config['TOP_DEFAULT'])
     body_id = request.args.get('body-id', app.config['BODY_DEFAULT'])
@@ -406,13 +412,18 @@ def render_staff():
         colors_body = app.config['COLORS_BODY_DEFAULT']
     # TODO: validate these before continuing
     # wtforms/webargs/voluptuous
-    image_base64 = get_staff_img(top_id, body_id, base_id, body_sections,
+    if base64:
+        image_base64 = get_staff_img(top_id, body_id, base_id, body_sections,
            colors_top, colors_body)
-    if embed:
-        return render_template('image_base64.html', image=image_base64, alt='staff')
-    return 'data:image/png;base64, ' + image_base64
-
-
+        if embed:
+            return render_template('image_base64.html', image=image_base64,
+                                   alt='staff')
+        return 'data:image/png;base64, ' + image_base64
+    response = make_response(get_staff_img(top_id, body_id, base_id,
+                             body_sections, colors_top, colors_body,
+                             base64=False))
+    response.headers.set('Content-Type', 'image/png')
+    return(response)
 
 
 def main():
